@@ -1,0 +1,9 @@
+uwsgi
+flask
+sqlalchemy
+flask-sqlalchemy
+geoalchemy2
+psycopg2
+requests
+webargs
+newrelic
