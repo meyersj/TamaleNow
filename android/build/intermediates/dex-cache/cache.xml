@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.4.0/a0c195f14cefc7597e0bebf22c3e7b43920dcf4/okhttp-urlconnection-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0a0c195f14cefc7597e0bebf22c3e7b43920dcf4">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.4.0-aaa50272755e06f8b5af767ae25b5866d09df645.jar" />
+    </item>
+    <item
+        jar="/home/jeff/github/TamaleNow/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/classes-a5f5df97a4a80030bae780c4e041b9735d15c5d3.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.4.0/40340c0748190fe897baf7bffbc1b282734294e5/okhttp-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="40340c0748190fe897baf7bffbc1b282734294e5">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/okhttp-2.4.0-4a6dda136cf37fef9aaf992ff41bcc31322cb1cb.jar" />
+    </item>
+    <item
+        jar="/home/jeff/github/TamaleNow/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/classes-fc937b650edfafdbfbe80e034dcf85d3dcd0d1f9.jar" />
+    </item>
+    <item
+        jar="/home/jeff/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-5305d8d4966a668fa92c5c933231dff664a7ae67.jar" />
+    </item>
+    <item
+        jar="/home/jeff/github/TamaleNow/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-c25b4bd75217258364750a2371fc1edd7fd89ae7.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.jakewharton/disklrucache/2.0.2/93b399470e72c0bc8cb52379943b63c9aa586cd8/disklrucache-2.0.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="93b399470e72c0bc8cb52379943b63c9aa586cd8">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/disklrucache-2.0.2-4d2a57768262092b75a3a583cfd222eaaebf7834.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.4.0/5b72bf48563ea8410e650de14aa33ff69a3e8c35/okio-1.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/okio-1.4.0-a5b38750575a5af6e484c07900dbb02c347c51da.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/butterknife-7.0.1-195904b80c924992574c7de1981d59ac6bb8a357.jar" />
+    </item>
+    <item
+        jar="/home/jeff/github/TamaleNow/app/build/intermediates/exploded-aar/com.mapbox.mapboxsdk/mapbox-android-sdk/0.7.4/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4bd64ebaab7edb0bccbb031dbdb7b1a7239d58f7">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/classes-8c870b2d3b4fe923f9ccf93a05fcb4ee28c65ed4.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.vividsolutions/jts/1.13/3ccfb9b60f04d71add996a666ceb8902904fd805/jts-1.13.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3ccfb9b60f04d71add996a666ceb8902904fd805">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/jts-1.13-3d40ee9eafb7878708a4b6d012eccb260a507615.jar" />
+    </item>
+    <item
+        jar="/home/jeff/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/jeff/github/TamaleNow/app/build/intermediates/pre-dexed/debug/library-2.4.0-2de79a9e1f70fa7cb0ad3f2848375ae841767cf8.jar" />
+    </item>
+
+</items>
