@@ -35,6 +35,6 @@ class Locations(db.Model):
     
     def __init__(self, **kwargs):
         self.vendor_id = kwargs["vendor_id"]
-        self.tstamp = datetime.strptime(kwargs["tstamp"], '%Y-%d-%m %H:%M:%S')
+        #self.tstamp = datetime.strptime(kwargs["tstamp"], '%Y-%d-%m %H:%M:%S')
         self.geom = build_geom(kwargs["lat"], kwargs["lon"]) 
 

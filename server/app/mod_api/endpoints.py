@@ -59,7 +59,7 @@ def active_post(args):
         response = dict(
             success=True,
             vendor_id=record.vendor_id,
-            active=record.active,
+            active=bool(record.active),
             msg="create new vendor record"
         )
     db.session.commit()
@@ -89,9 +89,8 @@ def active_get(args):
 
 location_post_args = {
     'vendor_id':Arg(str, required=True),
-    'tstamp':Arg(str, required=True),
-    'lat':Arg(float, requred=True),
-    'lon':Arg(float, requred=True)
+    'lat':Arg(str, requred=True),
+    'lon':Arg(str, requred=True)
 }
 
 
@@ -107,21 +106,24 @@ def location_post(args):
             success=False,
             msg="vendor_id: {0} does not exist".format(args["vendor_id"])
         )
-    elif not record.active:
+    elif record and not record.active:
         response = dict(
             vendor_id=args["vendor_id"],
             success=False,
             msg="vendor_id: {0} is not currently active".format(args["vendor_id"])
         )
     else:
-        location = Locations(**args)
-        db.session.add(location)
-        db.session.commit()
-        response = dict(
-            vendor_id=args["vendor_id"],
-            success=True,
-            msg="vendor_id: {0} location updated".format(args["vendor_id"])
-        )
+        try:
+            location = Locations(**args)
+            db.session.add(location)
+            db.session.commit()
+            response = dict(
+                vendor_id=args["vendor_id"],
+                success=True,
+                msg="vendor_id: {0} location updated".format(args["vendor_id"])
+            )
+        except Exception as e:
+            response = dict(error=str(e))
     return jsonify(response)
 
 
