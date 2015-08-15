@@ -1,0 +1,19 @@
+config.properties
+
+
+
+#vim files
+*.*swp
+*.*~
+
+
+# android studio stuff
+.idea
+*.iml
+*.iws
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
