@@ -30,6 +30,7 @@ public class TamaleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         singleton = this;
+        readProperties();
     }
 
     @Override
@@ -63,6 +64,10 @@ public class TamaleApplication extends Application {
 
     public String getMapID() {
         return properties.getProperty(PropKeys.MAP_ID, "");
+    }
+
+    public Long getGPSInterval() {
+        return Long.valueOf(properties.getProperty(PropKeys.GPS_INTERVAL, "")) * 1000;
     }
 
 }
