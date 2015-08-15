@@ -18,13 +18,25 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.meyersj.tamalenow.TamaleApplication;
+import com.meyersj.tamalenow.utilities.Utils;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+import java.util.Date;
 
 
 public class UpdateLocationService extends Service {
 
     public final String TAG = getClass().getCanonicalName();
-    LocListener listener;
-    LocationManager locationManager;
+    private TamaleLocationListener listener;
+    private OkHttpClient httpClient;
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -36,41 +48,58 @@ public class UpdateLocationService extends Service {
         super.onCreate();
         Long gpsInterval = ((TamaleApplication) getApplication()).getGPSInterval();
 
-        listener = new LocListener();
-        locationManager = (LocationManager) getApplicationContext()
-                .getSystemService(getApplicationContext().LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                gpsInterval, 20, listener);
-
+        httpClient = new OkHttpClient();
+        listener = new TamaleLocationListener(getApplicationContext(), gpsInterval) {
+            @Override
+            public void onLocationChanged(Location location) {
+                Log.d(TAG, "service: " + location.toString());
+                postLocation(location);
+            }
+        };
+        listener.start();
     }
 
     @Override
     public void onDestroy() {
         super.onCreate();
-        locationManager.removeUpdates(listener);
+        listener.stop(); //locationManager.removeUpdates(listener);
     }
 
 
-    public class LocListener implements LocationListener {
 
-        @Override
-        public void onLocationChanged(Location location) {
-            Log.d(TAG, location.toString());
-        }
+    public void postLocation(Location location) {
+        String date = Utils.dateFormat.format(new Date());
+        Log.d(TAG, date);
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("vendor_id", "test_vendor")
+                .add("tstamp", Utils.dateFormat.format(new Date()))
+                .add("lat", String.valueOf(location.getLatitude()))
+                .add("lon", String.valueOf(location.getLongitude()))
+                .build();
 
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
+        Request request = new Request.Builder()
+                .url("http://tamale.meyersj.com/api/location")
+                .post(formBody)
+                .build();
 
-        }
 
-        @Override
-        public void onProviderEnabled(String provider) {
+        httpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.d(TAG, "failure");
+            }
 
-        }
+            @Override
+            public void onResponse(Response response) throws IOException {
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                Log.d(TAG, response.body().string());
+            }
+        });
 
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
     }
+
+
+
+
+
 }
