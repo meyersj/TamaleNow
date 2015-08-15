@@ -6,6 +6,7 @@
 import unittest
 import uuid
 import json
+import time
 
 from app import app
 
@@ -14,39 +15,110 @@ class TestEndpoints(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
+    
+    #def test_db_config(self):
+    #    print app.config["SQLALCHEMY_DATABASE_URI"]
+    
+    def test_mod_api_index(self):
+        res = self.app.get('/api', follow_redirects=True)
+        assert res.status_code == 200
 
-    #def test_mod_api_index(self):
-    #    res = self.app.get('/api', follow_redirects=True)
-    #    assert res.status_code == 200
 
-
-class UploadRecordTests(unittest.TestCase):
+class UpdateActiveTests(unittest.TestCase):
 
     def setUp(self):
+        self.vendor = "test_vendor"
         self.app = app.test_client()
 
-    #def test_upload_empty(self):
-    #    rv = self.app.post(
-    #        '/api/upload/record', {}, follow_redirects=True
-    #    )
-    #    data = json.loads(rv.data)
-    #    assert "error" in data, "missing required params"
-    #    assert rv.status_code == 422
+    def test_active_post_get(self):
+        rv = self.app.post(
+            '/api/active',
+            data=dict(
+                vendor_id=self.vendor,
+                active=False
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+        
+        rv = self.app.get(
+            '/api/active',
+            data=dict(
+                vendor_id=self.vendor,
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+        assert data["active"] == False
 
-    #def test_upload_basic_no_questions(self):
-    #    rv = self.app.post(
-    #        '/api/upload/record',
-    #        data=dict(
-    #    	    tstamp="2000-01-01 12:12:12",
-	#	        username="testuser",
-    #            route="TEST_NONE",
-    #            uuid= uuid.uuid4()
-    #        ),
-    #        follow_redirects=True
-    #    )
-    #   assert rv.status_code == 200
+        rv = self.app.post(
+            '/api/active',
+            data=dict(
+                vendor_id=self.vendor,
+                active=True
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+
+        rv = self.app.get(
+            '/api/active',
+            data=dict(
+                vendor_id=self.vendor,
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+        assert data["active"] == True
 
 
+class LocationUpdateTests(unittest.TestCase):
+
+    def setUp(self):
+        self.vendor = "test_vendor"
+        self.app = app.test_client()
+
+    def test_location_post(self):
+        rv = self.app.post(
+            '/api/active',
+            data=dict(
+                vendor_id=self.vendor,
+                active=True
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+        
+        rv = self.app.post(
+            '/api/location',
+            data=dict(
+                vendor_id=self.vendor,
+                tstamp=time.strftime('%Y-%d-%m %H:%M:%S'),
+                lat="45.52",
+                lon="-122.681944"
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        assert data["success"] == True
+     
+    def test_location_get(self):
+        rv = self.app.get(
+            '/api/location',
+            data=dict(
+                vendor_id=self.vendor,
+            ),
+            follow_redirects=True
+        )
+        data = json.loads(rv.data)
+        print data
+        #assert data["success"] == True
+      
 
 if __name__ == '__main__':
     unittest.main()

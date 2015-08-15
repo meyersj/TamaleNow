@@ -10,9 +10,10 @@ CREATE TABLE active (
 
 DROP TABLE IF EXISTS locations;
 CREATE TABLE locations (
-    vendor_id VARCHAR PRIMARY KEY,
-    tstamp TIMESTAMP WITHOUT TIME ZONE,
-    geom GEOMETRY(Point, 4326)
+    vendor_id VARCHAR NOT NULL,
+    tstamp TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    geom GEOMETRY(Point, 4326),
+    PRIMARY KEY (vendor_id, tstamp)
 );
 
 COMMIT;
