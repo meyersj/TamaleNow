@@ -1,3 +1,8 @@
+*.*~
+*.*.sw*
+*.pyc
+
+env/
 config/*
 config.py
 user.sql
