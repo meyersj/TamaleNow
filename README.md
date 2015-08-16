@@ -13,3 +13,7 @@ and where their current location is.
 
 You can check out the [live display](http://meyersj.github.io/TamaleNow), but it will probably not
 be very exciting as no vendors have started broadcasting their location.
+
+#### ChangeLog
+
+0.1 - fully functioning prototype
