@@ -1,8 +1,13 @@
+/*
+ * Copyright (c) 2015 Jeffrey Meyers
+ *
+ * This program is released under the "MIT License".
+ * Please see the file COPYING in this distribution for license terms.
+ */
+
 package com.meyersj.tamalenow.utilities;
 
-/**
- * Created by jeff on 8/15/15.
- */
+
 public class Endpoints {
 
     public static final String ACTIVE = "active";
