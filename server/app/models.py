@@ -20,11 +20,12 @@ def build_geom(lat, lon):
 class Active(db.Model):
     __tablename__ = 'active'
     vendor_id = db.Column(db.String, primary_key=True)
+    tstamp = db.Column(db.DateTime, primary_key=True)
     active = db.Column(db.Boolean)
     
     def __init__(self, **kwargs):
-        for key, value in kwargs.iteritems():
-            setattr(self, key, value)
+        self.vendor_id = kwargs["vendor_id"]
+        self.active = kwargs["active"]
 
 class Locations(db.Model):
     __tablename__ = 'locations'
@@ -35,6 +36,5 @@ class Locations(db.Model):
     
     def __init__(self, **kwargs):
         self.vendor_id = kwargs["vendor_id"]
-        #self.tstamp = datetime.strptime(kwargs["tstamp"], '%Y-%d-%m %H:%M:%S')
         self.geom = build_geom(kwargs["lat"], kwargs["lon"]) 
 
