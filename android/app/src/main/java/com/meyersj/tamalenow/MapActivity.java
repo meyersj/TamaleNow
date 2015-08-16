@@ -7,10 +7,7 @@
 
 package com.meyersj.tamalenow;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -114,8 +111,6 @@ public class MapActivity extends AppCompatActivity {
             }
         };
     }
-
-
 
     public void onToggleReporting(View view) {
         if(!isReporting) {
