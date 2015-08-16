@@ -16,4 +16,5 @@ be very exciting as no vendors have started broadcasting their location.
 
 #### ChangeLog
 
-0.1 fully functioning prototype
+##### v0.1
+fully functioning prototype
