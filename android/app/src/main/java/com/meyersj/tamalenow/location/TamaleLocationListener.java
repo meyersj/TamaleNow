@@ -25,6 +25,14 @@ public class TamaleLocationListener implements LocationListener {
         return new LatLng(location.getLatitude(), location.getLongitude());
     }
 
+    public void start() {
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval, 20, this);
+    }
+
+    public void stop() {
+        locationManager.removeUpdates(this);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
 
@@ -43,14 +51,6 @@ public class TamaleLocationListener implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
-    }
-
-    public void start() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, gpsInterval, 20, this);
-    }
-
-    public void stop() {
-        locationManager.removeUpdates(this);
     }
 
 }

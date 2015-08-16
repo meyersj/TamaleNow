@@ -18,6 +18,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.meyersj.tamalenow.TamaleApplication;
+import com.meyersj.tamalenow.utilities.Endpoints;
 import com.meyersj.tamalenow.utilities.Utils;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -34,6 +35,8 @@ import java.util.Date;
 public class UpdateLocationService extends Service {
 
     public final String TAG = getClass().getCanonicalName();
+
+    private TamaleApplication app;
     private TamaleLocationListener listener;
     private OkHttpClient httpClient;
 
@@ -46,13 +49,13 @@ public class UpdateLocationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Long gpsInterval = ((TamaleApplication) getApplication()).getGPSInterval();
+
+        app = (TamaleApplication) getApplication();
 
         httpClient = new OkHttpClient();
-        listener = new TamaleLocationListener(getApplicationContext(), gpsInterval) {
+        listener = new TamaleLocationListener(getApplicationContext(), app.getGPSInterval()) {
             @Override
             public void onLocationChanged(Location location) {
-                Log.d(TAG, "service: " + location.toString());
                 postLocation(location);
             }
         };
@@ -62,10 +65,8 @@ public class UpdateLocationService extends Service {
     @Override
     public void onDestroy() {
         super.onCreate();
-        listener.stop(); //locationManager.removeUpdates(listener);
+        listener.stop();
     }
-
-
 
     public void postLocation(Location location) {
         String date = Utils.dateFormat.format(new Date());
@@ -78,7 +79,7 @@ public class UpdateLocationService extends Service {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://tamale.meyersj.com/api/location")
+                .url(app.getAPIBase() + "/" + Endpoints.LOCATION)
                 .post(formBody)
                 .build();
 

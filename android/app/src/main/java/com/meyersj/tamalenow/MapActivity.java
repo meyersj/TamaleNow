@@ -23,6 +23,7 @@ import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.meyersj.tamalenow.location.TamaleLocationListener;
 import com.meyersj.tamalenow.location.UpdateLocationService;
+import com.meyersj.tamalenow.utilities.Endpoints;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Headers;
@@ -113,6 +114,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
+
     public void onToggleReporting(View view) {
         if(!isReporting) {
             startReporting();
@@ -123,9 +125,9 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void startReporting() {
+        toggleReporting.setText(R.string.stop_reporting);
         isReporting = true;
         updateStatus(VENDOR, true);
-        toggleReporting.setText(R.string.stop_reporting);
         gpsListener.start();
         Intent intent = new Intent(getApplicationContext(), UpdateLocationService.class);
         startService(intent);
@@ -136,6 +138,8 @@ public class MapActivity extends AppCompatActivity {
         isReporting = false;
         updateStatus(VENDOR, false);
         gpsListener.stop();
+        mapView.removeMarker(locationMarker);
+        locationMarker = null;
         Intent intent = new Intent(getApplicationContext(), UpdateLocationService.class);
         stopService(intent);
     }
@@ -148,11 +152,12 @@ public class MapActivity extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://tamale.meyersj.com/api/active")
+                .url(app.getAPIBase() + "/" + Endpoints.ACTIVE)
                 .post(formBody)
                 .build();
 
         httpClient.newCall(request).enqueue(new Callback() {
+
             @Override
             public void onFailure(Request request, IOException e) {
                 Log.d(TAG, "failure");
@@ -164,8 +169,6 @@ public class MapActivity extends AppCompatActivity {
                 Log.d(TAG, response.body().string());
             }
         });
-
-
     }
 
 

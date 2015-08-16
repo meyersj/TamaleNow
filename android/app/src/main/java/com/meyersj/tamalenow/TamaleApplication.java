@@ -70,4 +70,8 @@ public class TamaleApplication extends Application {
         return Long.valueOf(properties.getProperty(PropKeys.GPS_INTERVAL, "")) * 1000;
     }
 
+    public String getAPIBase() {
+        return properties.getProperty(PropKeys.API_BASE, "");
+    }
+
 }
