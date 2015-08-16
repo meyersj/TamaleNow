@@ -1,6 +1,10 @@
 #!env/bin/python
 
 # Copyright (C) 2015 Jeffrey Meyers
+#
+# This program is released under the "MIT License".
+# Please see the file COPYING in this distribution for
+# license terms.
 
 
 import unittest
@@ -116,9 +120,8 @@ class LocationUpdateTests(unittest.TestCase):
             follow_redirects=True
         )
         data = json.loads(rv.data)
-        print data
-        #assert data["success"] == True
-      
+        assert data["success"] == True
+
 
 if __name__ == '__main__':
     unittest.main()
