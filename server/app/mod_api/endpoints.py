@@ -91,9 +91,9 @@ def location_post(args):
     status = query_vendor_status(args["vendor_id"])
     response = dict(vendor_id=args["vendor_id"], success=False)
     if not status:
-        response["msg"] = "vendor_id: {0} does not exist".format(args["vendor_id"])
+        response["msg"] = "vendor does not exist".format(args["vendor_id"])
     elif status and not status.active:
-        response["msg"] = "vendor_id: {0} is not currently active".\
+        response["msg"] = "vendor is not currently active".\
                 format(args["vendor_id"])
     elif status and status.active:
         try:
@@ -101,7 +101,7 @@ def location_post(args):
             db.session.add(location)
             db.session.commit()
             response["success"] = True
-            response["msg"] = "vendor_id: {0} location updated".\
+            response["msg"] = "location updated".\
                     format(args["vendor_id"])
         except Exception as e:
             response["exception"] = str(e)
@@ -129,11 +129,11 @@ def location_get(args):
     response = dict(vendor_id=args["vendor_id"], success=False)
     # vendor does not exists
     if not status:
-        response["msg"] = "Error: vendor_id: {0} does not exist".\
+        response["msg"] = "vendor does not exist".\
                 format(args["vendor_id"])
     # vendor is not active
     elif status and not status.active:
-        response["msg"] = "vendor_id: {0} is not currently active".\
+        response["msg"] = "vendor is not currently active".\
                 format(args["vendor_id"])
     # vendor is active so look up most recent coordinates
     else:
