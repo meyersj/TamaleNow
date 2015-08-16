@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head;
+        any other head content must come *after* these tags -->
+    <title>Tamale Now!</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"
+        rel="stylesheet">
+    <style>
+      #map {
+        width: 100px;
+        height:100px;
+        min-height: 100%;
+        min-width: 100%;
+        display: block;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      .fill {
+        min-height: 80%;
+        height: 80%;
+        width: 100%;
+        min-width: 100%;
+        padding-top: 5px;
+      }    
+    </style>    
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h3>Tamale Now!</h4>
+    </div>    
+    <div class="container-fluid fill">
+      <div id="map"></div>
+    </div>    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+    </script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js">
+    </script>
+    <script>
+
+var map = null;
+var location_endpoint = "http://tamale.meyersj.com/api/location";
+var location_marker;
+
+
+// tile configuration strings
+var mapbox_id = "meyersj.n64oe902";
+var mapbox_token = "pk.eyJ1IjoibWV5ZXJzaiIsImEiOiJiWXYzSnBVIn0.Ello9UwAKDpmOrrL2HCcvw";
+var mapbox_url = "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}";
+var osm_url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+var attrib = '&copy;<a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
+
+function create_map(tile_generator) {
+    var portland = [45.52, -122.62];
+    var map = L.map('map').setView(portland, 12);
+    tile_generator().addTo(map);
+    return map;
+}
+
+function osm_tiles() {
+    return L.tileLayer(osm_url, {attribution:attrib});    
+}
+
+
+function mapbox_tiles() {
+    return L.tileLayer(mapbox_url, {
+        attribution: attrib,
+        id: mapbox_id,
+        accessToken: mapbox_token
+    });
+}
+
+function update() {
+    var args = {vendor_id:"test_vendor"};
+    $.getJSON(location_endpoint, args, function(data) {
+        console.log(data);
+        if(data.success == true) {
+            var coord = [data.lat, data.lon];
+            if (location_marker == null) {
+                location_marker = L.marker(coord).addTo(map);
+            }
+            else {
+                location_marker.setLatLng(coord);
+            }
+            map.panTo(coord);
+        }
+    });
+}
+
+$(document).ready(function () {
+    map = create_map(mapbox_tiles);
+    update();
+    setInterval(update, 5000);
+});
+
+    </script>
+  </body>
+</html>
