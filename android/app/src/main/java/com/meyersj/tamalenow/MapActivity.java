@@ -7,7 +7,10 @@
 
 package com.meyersj.tamalenow;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +29,6 @@ import com.meyersj.tamalenow.location.UpdateLocationService;
 import com.meyersj.tamalenow.utilities.Endpoints;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
