@@ -17,4 +17,5 @@ be very exciting as no vendors have started broadcasting their location.
 #### ChangeLog
 
 ##### v0.1
-fully functioning prototype
++ fully functioning prototype
++ [TamaleNow v0.1 apk](https://github.com/meyersj/TamaleNow/blob/master/android/release/TamaleNow_v0.1.apk?raw=true)
